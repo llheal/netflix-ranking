@@ -212,6 +212,9 @@ const Components = (() => {
               </a>
             ` : ''}
           </div>
+          <button class="modal-link-btn share" id="modal-share-btn">
+            📤 友だちに共有
+          </button>
         </div>
       </div>
     `;
@@ -226,11 +229,67 @@ const Components = (() => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeModal(overlay);
     });
+
+    // Share button
+    overlay.querySelector('#modal-share-btn').addEventListener('click', () => {
+      shareToLINE(item, rank);
+    });
   }
 
   function closeModal(overlay) {
     overlay.classList.remove('active');
     setTimeout(() => overlay.remove(), 400);
+  }
+
+  /**
+   * Share a movie recommendation to LINE friends via LIFF shareTargetPicker
+   */
+  function shareToLINE(item, rank) {
+    const displayTitle = item.titleJa || item.title;
+    const scoreText = item.imdbScore ? `IMDb ${item.imdbScore}` : '未評価';
+    const miniAppUrl = 'https://miniapp.line.me/2009310517-1zqDTtPq';
+    const description = `#${rank}位 ${scoreText} — Netflix 評価ランキング`;
+
+    // Check LIFF availability
+    if (typeof liff !== 'undefined' && liff.isApiAvailable && liff.isApiAvailable('shareTargetPicker')) {
+      liff.shareTargetPicker([{
+        type: 'flex',
+        altText: `🎬 ${displayTitle} をおすすめ！ ${description}`,
+        contents: {
+          type: 'bubble',
+          size: 'mega',
+          header: {
+            type: 'box', layout: 'vertical',
+            contents: [{ type: 'text', text: '🎬 Netflix おすすめ', weight: 'bold', size: 'lg', color: '#E50914' }],
+            backgroundColor: '#141414', paddingAll: '12px',
+          },
+          body: {
+            type: 'box', layout: 'vertical',
+            contents: [
+              { type: 'text', text: displayTitle, weight: 'bold', size: 'xl', wrap: true },
+              { type: 'text', text: description, size: 'sm', color: '#999999', margin: 'md', wrap: true },
+            ],
+          },
+          footer: {
+            type: 'box', layout: 'vertical',
+            contents: [{
+              type: 'button',
+              action: { type: 'uri', label: '🎬 ランキングを見る', uri: miniAppUrl },
+              style: 'primary', color: '#E50914',
+            }],
+            paddingAll: '10px',
+          },
+        },
+      }]).catch(err => console.error('[Share] Error:', err));
+    } else if (navigator.share) {
+      navigator.share({
+        title: `${displayTitle} — Netflix 評価ランキング`,
+        text: description,
+        url: miniAppUrl,
+      }).catch(() => { });
+    } else {
+      alert('LINEアプリ内で共有機能をご利用ください');
+    }
   }
 
   return {

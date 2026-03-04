@@ -1077,6 +1077,18 @@ body {
   box-shadow: 0 4px 16px var(--imdb-gold-glow);
 }
 
+.modal-link-btn.share {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #06C755, #04a847);
+  color: white;
+}
+
+.modal-link-btn.share:hover {
+  box-shadow: 0 4px 16px rgba(6, 199, 85, 0.3);
+}
+
 /* ---------- Animations ---------- */
 @keyframes fadeInUp {
   from {
