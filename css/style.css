@@ -473,6 +473,8 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   flex-shrink: 0;
+  min-width: 32px;
+  text-align: center;
 }
 
 .score-chip {
