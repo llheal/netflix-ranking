@@ -40,17 +40,26 @@ const Components = (() => {
    */
   function renderImdbBadge(item) {
     if (item.imdbScore && item.imdbScore > 0) {
+      let votesText = '';
+      if (item.imdbVotes && item.imdbVotes > 0) {
+        if (item.imdbVotes >= 10000) {
+          votesText = `<span class="imdb-votes">${(item.imdbVotes / 10000).toFixed(1)}万票</span>`;
+        } else {
+          votesText = `<span class="imdb-votes">${item.imdbVotes.toLocaleString()}票</span>`;
+        }
+      }
       return `
-              <div class="imdb-badge">
-                <span class="imdb-label">IMDb</span>
-                <span class="imdb-score">${item.imdbScore.toFixed(1)}</span>
-              </div>`;
+            <div class="imdb-badge">
+              <span class="imdb-label">IMDb</span>
+              <span class="imdb-score">${item.imdbScore.toFixed(1)}</span>
+              ${votesText}
+            </div>`;
     }
     return `
-          <div class="imdb-badge no-score">
-            <span class="imdb-label">IMDb</span>
-            <span class="imdb-score">—</span>
-          </div>`;
+        <div class="imdb-badge no-score">
+          <span class="imdb-label">IMDb</span>
+          <span class="imdb-score">—</span>
+        </div>`;
   }
 
   /**

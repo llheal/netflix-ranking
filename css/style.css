@@ -686,6 +686,13 @@ body {
   font-weight: 900;
 }
 
+.imdb-votes {
+  font-size: 9px;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
 /* Unrated badge — grey instead of gold */
 .imdb-badge.no-score {
   background: rgba(255, 255, 255, 0.1);
