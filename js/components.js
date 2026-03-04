@@ -5,26 +5,32 @@
 
 const Components = (() => {
 
-  /** Genre name → Japanese label mapping (JustWatch genres) */
+  /** Genre name → Japanese label mapping (IMDb genres) */
   const GENRE_MAP = {
     'Action': 'アクション',
     'Adventure': 'アドベンチャー',
-    'Anime': 'アニメ',
+    'Animation': 'アニメ',
+    'Biography': '伝記',
     'Comedy': 'コメディ',
     'Crime': '犯罪',
     'Documentary': 'ドキュメンタリー',
     'Drama': 'ドラマ',
-    'European': 'ヨーロッパ',
     'Family': 'ファミリー',
     'Fantasy': 'ファンタジー',
+    'Film-Noir': 'フィルム・ノワール',
+    'Game-Show': 'ゲーム番組',
     'History': '歴史',
     'Horror': 'ホラー',
     'Music': '音楽',
+    'Musical': 'ミュージカル',
     'Mystery': 'ミステリー',
+    'News': 'ニュース',
     'Reality-TV': 'リアリティ',
     'Romance': 'ロマンス',
     'Sci-Fi': 'SF',
+    'Short': '短編',
     'Sport': 'スポーツ',
+    'Talk-Show': 'トーク番組',
     'Thriller': 'スリラー',
     'War': '戦争',
     'Western': '西部劇',
