@@ -82,32 +82,40 @@
       </button>
     </div>
 
-    <!-- IMDb Score Filter — always visible -->
-    <div id="score-filter" class="score-filter">
-      <span class="score-filter-label">IMDb</span>
-      <button class="score-chip active" data-score-range="all">ALL</button>
-      <button class="score-chip" data-score-range="0-5">~5</button>
-      <button class="score-chip" data-score-range="5-6">5~6</button>
-      <button class="score-chip" data-score-range="6-7">6~7</button>
-      <button class="score-chip" data-score-range="7-8">7~8</button>
-      <button class="score-chip" data-score-range="8-9">8~9</button>
-      <button class="score-chip" data-score-range="9-10">9+</button>
-      <button class="score-chip" data-score-range="none">無</button>
+    <!-- 1. Country Filter -->
+    <div id="country-filter" class="score-filter">
+      <span class="score-filter-label">国</span>
+      <button class="score-chip active" data-country="all">すべて</button>
+      <button class="score-chip" data-country="US">🇺🇸 米国</button>
+      <button class="score-chip" data-country="JP">🇯🇵 日本</button>
+      <button class="score-chip" data-country="EU">🇪🇺 欧州</button>
+      <button class="score-chip" data-country="KR">🇰🇷 韓国</button>
+      <button class="score-chip" data-country="other">その他</button>
     </div>
 
-    <!-- Year Range Filter -->
+    <!-- 2. Year Range Filter -->
     <div id="year-filter" class="score-filter">
       <span class="score-filter-label">年代</span>
       <button class="score-chip active" data-year-range="all">すべて</button>
       <button class="score-chip" id="year-current" data-year-range="2026-2026">2026</button>
-      <button class="score-chip" data-year-range="2021-2025">~2025</button>
-      <button class="score-chip" data-year-range="2011-2020">'10s</button>
-      <button class="score-chip" data-year-range="2001-2010">'00s</button>
-      <button class="score-chip" data-year-range="1991-2000">'90s</button>
-      <button class="score-chip" data-year-range="1900-1990">~1990</button>
+      <button class="score-chip" data-year-range="2001-2025">2000s</button>
+      <button class="score-chip" data-year-range="1981-2000">1980s</button>
+      <button class="score-chip" data-year-range="1900-1980">~1980</button>
     </div>
 
-    <!-- Votes Min Filter -->
+    <!-- 3. IMDb Score Filter -->
+    <div id="score-filter" class="score-filter">
+      <span class="score-filter-label">IMDb</span>
+      <button class="score-chip active" data-score-range="all">すべて</button>
+      <button class="score-chip" data-score-range="9-10">9+</button>
+      <button class="score-chip" data-score-range="8-9">8~9</button>
+      <button class="score-chip" data-score-range="7-8">7~8</button>
+      <button class="score-chip" data-score-range="6-7">6~7</button>
+      <button class="score-chip" data-score-range="0-6">~6</button>
+      <button class="score-chip" data-score-range="none">無</button>
+    </div>
+
+    <!-- 4. Votes Min Filter -->
     <div id="votes-filter" class="score-filter">
       <span class="score-filter-label">評価数</span>
       <button class="score-chip active" data-votes-min="all">すべて</button>
@@ -115,22 +123,6 @@
       <button class="score-chip" data-votes-min="1000">1K+</button>
       <button class="score-chip" data-votes-min="10000">1万+</button>
       <button class="score-chip" data-votes-min="100000">10万+</button>
-    </div>
-
-    <!-- Country Filter -->
-    <div id="country-filter" class="score-filter">
-      <span class="score-filter-label">国</span>
-      <button class="score-chip active" data-country="all">すべて</button>
-      <button class="score-chip" data-country="US">🇺🇸</button>
-      <button class="score-chip" data-country="GB">🇬🇧</button>
-      <button class="score-chip" data-country="JP">🇯🇵</button>
-      <button class="score-chip" data-country="KR">🇰🇷</button>
-      <button class="score-chip" data-country="IN">🇮🇳</button>
-      <button class="score-chip" data-country="FR">🇫🇷</button>
-      <button class="score-chip" data-country="DE">🇩🇪</button>
-      <button class="score-chip" data-country="ES">🇪🇸</button>
-      <button class="score-chip" data-country="CA">🇨🇦</button>
-      <button class="score-chip" data-country="AU">🇦🇺</button>
     </div>
     <!-- Search Bar (visible only in search tab) -->
     <div id="search-bar" class="search-bar hidden">
