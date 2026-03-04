@@ -47,6 +47,9 @@ const API = (() => {
         if (filters.country && filters.country !== 'all') {
             params += `&country=${filters.country}`;
         }
+        if (filters.sortBy && filters.sortBy !== 'score_desc') {
+            params += `&sortBy=${filters.sortBy}`;
+        }
         return params;
     }
 
