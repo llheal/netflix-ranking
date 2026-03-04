@@ -8,7 +8,7 @@ const Components = (() => {
   /** Genre name → Japanese label mapping */
   const GENRE_MAP = {
     'Action': 'アクション',
-    'Animation': 'アニメーション',
+    'Animation': 'アニメ',
     'Anime': 'アニメ',
     'Comedy': 'コメディ',
     'Crime': '犯罪',
