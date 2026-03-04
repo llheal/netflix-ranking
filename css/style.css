@@ -1188,3 +1188,21 @@ body {
     align-items: center;
   }
 }
+
+/* ---------- App Footer ---------- */
+.app-footer {
+  text-align: center;
+  padding: 24px 0 40px;
+  margin-top: 16px;
+}
+
+.app-footer a {
+  color: #666;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.app-footer a:hover {
+  color: #999;
+}
