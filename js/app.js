@@ -45,6 +45,14 @@ const App = (() => {
         searchInput = document.getElementById('search-input');
         searchClear = document.getElementById('search-clear');
 
+        // Dynamic current year for year filter
+        const currentYear = new Date().getFullYear();
+        const yearBtn = document.getElementById('year-current');
+        if (yearBtn) {
+            yearBtn.textContent = String(currentYear);
+            yearBtn.dataset.yearRange = `${currentYear}-${currentYear}`;
+        }
+
         // Tab buttons
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => switchTab(btn.dataset.tab));

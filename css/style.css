@@ -457,6 +457,7 @@ body {
 .score-filter {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 5px;
   padding: 4px 16px 8px;
 }
@@ -475,7 +476,7 @@ body {
 }
 
 .score-chip {
-  flex: 1;
+  flex: 0 0 auto;
   padding: 5px 4px;
   border: 1px solid var(--border-light);
   border-radius: 8px;
