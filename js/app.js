@@ -11,6 +11,7 @@ const App = (() => {
         scoreRange: 'all',      // 'all', 'none', '0-5', '5-6', '6-7', '7-8', '8-9', '9-10'
         yearRange: 'all',       // 'all', '2021-2030', '2011-2020', '2001-2010', '1991-2000', '1900-1990'
         votesMin: 'all',        // 'all', '100', '1000', '10000', '100000'
+        country: 'all',         // 'all', 'US', 'JP', 'KR', 'GB', etc.
         page: 1,
         limit: 20,
         loading: false,
@@ -31,7 +32,7 @@ const App = (() => {
      * Get current filters object for API calls
      */
     function getFilters() {
-        return { scoreRange: state.scoreRange, yearRange: state.yearRange, votesMin: state.votesMin };
+        return { scoreRange: state.scoreRange, yearRange: state.yearRange, votesMin: state.votesMin, country: state.country };
     }
 
     /**
@@ -88,6 +89,16 @@ const App = (() => {
             chip.addEventListener('click', () => {
                 state.votesMin = chip.dataset.votesMin || 'all';
                 document.querySelectorAll('#votes-filter .score-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                resetAndLoad();
+            });
+        });
+
+        // Country filter chips
+        document.querySelectorAll('#country-filter .score-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                state.country = chip.dataset.country || 'all';
+                document.querySelectorAll('#country-filter .score-chip').forEach(c => c.classList.remove('active'));
                 chip.classList.add('active');
                 resetAndLoad();
             });

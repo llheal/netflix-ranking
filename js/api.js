@@ -44,6 +44,9 @@ const API = (() => {
         if (filters.votesMin && filters.votesMin !== 'all') {
             params += `&votesMin=${filters.votesMin}`;
         }
+        if (filters.country && filters.country !== 'all') {
+            params += `&country=${filters.country}`;
+        }
         return params;
     }
 

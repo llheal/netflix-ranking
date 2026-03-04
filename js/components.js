@@ -215,6 +215,12 @@ const Components = (() => {
       ? `<div class="modal-synopsis">${item.synopsis}</div>`
       : '';
 
+    // Country flags
+    const countryFlags = (item.country || []).map(c => {
+      const flag = c.toUpperCase().replace(/./g, ch => String.fromCodePoint(127397 + ch.charCodeAt(0)));
+      return flag;
+    }).join(' ');
+
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     overlay.innerHTML = `
@@ -235,7 +241,7 @@ const Components = (() => {
           <div class="modal-meta">
             ${imdbSection}
             <span class="modal-type">${typeLabel}</span>
-            <span class="modal-date">#${rank}位 ${item.year ? `• ${item.year}年` : ''} ${dateStr ? `• 配信: ${dateStr}` : ''}</span>
+            <span class="modal-date">#${rank}位 ${item.year ? `• ${item.year}年` : ''} ${countryFlags ? `• ${countryFlags}` : ''} ${dateStr ? `• 配信: ${dateStr}` : ''}</span>
           </div>
           <div class="modal-genres">${genreTags}</div>
           ${synopsisSection}
