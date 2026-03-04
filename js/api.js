@@ -41,6 +41,9 @@ const API = (() => {
         if (filters.yearRange && filters.yearRange !== 'all') {
             params += `&yearRange=${filters.yearRange}`;
         }
+        if (filters.votesMin && filters.votesMin !== 'all') {
+            params += `&votesMin=${filters.votesMin}`;
+        }
         return params;
     }
 

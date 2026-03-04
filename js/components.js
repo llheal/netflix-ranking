@@ -183,10 +183,17 @@ const Components = (() => {
     ).join('');
 
     // IMDb section for modal
+    let modalVotes = '';
+    if (item.imdbVotes && item.imdbVotes > 0) {
+      modalVotes = item.imdbVotes >= 10000
+        ? `<span class="modal-imdb-votes">(${(item.imdbVotes / 10000).toFixed(1)}万件)</span>`
+        : `<span class="modal-imdb-votes">(${item.imdbVotes.toLocaleString()}件)</span>`;
+    }
     const imdbSection = (item.imdbScore && item.imdbScore > 0)
       ? `<div class="modal-imdb">
                 <span class="label">IMDb</span>
                 <span class="score">${item.imdbScore.toFixed(1)}</span>
+                ${modalVotes}
                </div>`
       : `<div class="modal-imdb no-score">
                 <span class="label">IMDb</span>
