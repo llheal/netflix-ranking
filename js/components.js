@@ -5,25 +5,35 @@
 
 const Components = (() => {
 
-  /** Genre name → Japanese label mapping */
+  /** Genre name → Japanese label mapping (1:1 with IMDb) */
   const GENRE_MAP = {
     'Action': 'アクション',
-    'Animation': 'アニメ',
+    'Adventure': 'アドベンチャー',
     'Anime': 'アニメ',
+    'Animation': 'アニメ',
+    'Biography': '伝記',
     'Comedy': 'コメディ',
     'Crime': '犯罪',
     'Documentary': 'ドキュメンタリー',
     'Drama': 'ドラマ',
     'Family': 'ファミリー',
     'Fantasy': 'ファンタジー',
+    'Film-Noir': 'フィルム・ノワール',
+    'Game-Show': 'ゲーム番組',
+    'History': '歴史',
     'Horror': 'ホラー',
-    'Independent': 'インディーズ',
+    'Music': '音楽',
     'Musical': 'ミュージカル',
-    'Reality': 'リアリティ',
+    'Mystery': 'ミステリー',
+    'News': 'ニュース',
+    'Reality-TV': 'リアリティ',
     'Romance': 'ロマンス',
     'Sci-Fi': 'SF',
-    'Stand-up': 'スタンドアップ',
+    'Short': '短編',
+    'Sport': 'スポーツ',
+    'Talk-Show': 'トーク番組',
     'Thriller': 'スリラー',
+    'War': '戦争',
     'Western': '西部劇',
     'Other': 'その他'
   };
