@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Netflix日本で配信中の全作品をIMDbスコア順にランキング表示。新着・カテゴリ別・検索機能付き。">
+  <meta name="theme-color" content="#141414">\r\n
+  <meta name="liff-id" content="2009310517-1zqDTtPq">
+  <title>Netflix Japan IMDb ランキング</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- LINE LIFF SDK -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header id="app-header" class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 2L8.5 22L12 8L15.5 22L20 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="header-title">
+          <h1>Netflix Japan</h1>
+          <span class="header-subtitle">IMDb ランキング</span>
+        </div>
+      </div>
+      <div class="header-stats" id="header-stats">
+        <span class="stat-badge" id="total-count">-- 作品</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav id="tab-nav" class="tab-nav">
+    <button class="tab-btn active" data-tab="global" id="tab-global">
+      <span class="tab-icon">🏆</span>
+      <span class="tab-label">総合</span>
+    </button>
+    <button class="tab-btn" data-tab="new" id="tab-new">
+      <span class="tab-icon">🆕</span>
+      <span class="tab-label">新着</span>
+    </button>
+    <button class="tab-btn" data-tab="category" id="tab-category">
+      <span class="tab-icon">🎬</span>
+      <span class="tab-label">カテゴリ</span>
+    </button>
+    <button class="tab-btn" data-tab="search" id="tab-search">
+      <span class="tab-icon">🔍</span>
+      <span class="tab-label">検索</span>
+    </button>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main id="main-content" class="main-content">
+
+    <!-- Type Filter (映画 / シリーズ) — always visible -->
+    <div id="type-filter" class="type-filter">
+      <button class="type-btn active" data-type="all" id="type-all">
+        <span class="type-btn-icon">🎯</span> すべて
+      </button>
+      <button class="type-btn" data-type="movie" id="type-movie">
+        <span class="type-btn-icon">🎬</span> 映画
+      </button>
+      <button class="type-btn" data-type="series" id="type-series">
+        <span class="type-btn-icon">📺</span> シリーズ
+      </button>
+    </div>
+
+    <!-- IMDb Score Filter — always visible -->
+    <div id="score-filter" class="score-filter">
+      <span class="score-filter-label">IMDb</span>
+      <button class="score-chip active" data-score-range="all">ALL</button>
+      <button class="score-chip" data-score-range="0-5">~5</button>
+      <button class="score-chip" data-score-range="5-6">5~6</button>
+      <button class="score-chip" data-score-range="6-7">6~7</button>
+      <button class="score-chip" data-score-range="7-8">7~8</button>
+      <button class="score-chip" data-score-range="8-9">8~9</button>
+      <button class="score-chip" data-score-range="9-10">9+</button>
+      <button class="score-chip" data-score-range="none">無</button>
+    </div>
+
+    <!-- Search Bar (visible only in search tab) -->
+    <div id="search-bar" class="search-bar hidden">
+      <div class="search-input-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-input" placeholder="タイトルやジャンルで検索..." autocomplete="off">
+        <button id="search-clear" class="search-clear hidden">✕</button>
+      </div>
+    </div>
+
+    <!-- Genre Pills (visible only in category tab) -->
+    <div id="genre-pills" class="genre-pills hidden">
+      <!-- Dynamically populated -->
+    </div>
+
+    <!-- New Arrivals Period Selector -->
+    <div id="period-selector" class="period-selector hidden">
+      <button class="period-btn active" data-days="7">7日</button>
+      <button class="period-btn" data-days="14">14日</button>
+      <button class="period-btn" data-days="30">30日</button>
+    </div>
+
+    <!-- Results Info -->
+    <div id="results-info" class="results-info">
+      <span id="results-text"></span>
+    </div>
+
+    <!-- Card Grid -->
+    <div id="card-grid" class="card-grid">
+      <!-- Dynamically populated -->
+    </div>
+
+    <!-- Loading Skeleton -->
+    <div id="loading-skeleton" class="loading-skeleton hidden">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+
+    <!-- Infinite Scroll Sentinel -->
+    <div id="scroll-sentinel" class="scroll-sentinel">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="empty-state hidden">
+      <div class="empty-icon">🎭</div>
+      <p class="empty-text">作品が見つかりません</p>
+      <p class="empty-subtext">別のキーワードやカテゴリをお試しください</p>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/liff-init.js"></script>
+
+</body>
+
+</html>
