@@ -65,9 +65,20 @@ const Components = (() => {
     const rankClass = rank <= 3 ? 'top-3' : (rank <= 10 ? 'top-10' : '');
     const typeClass = item.type === 'series' ? 'series' : 'movie';
     const typeLabel = item.type === 'series' ? 'シリーズ' : '映画';
-    const genreTags = (item.genres || []).slice(0, 2).map(g =>
-      `<span class="card-genre-tag">${genreLabel(g)}</span>`
-    ).join('');
+    // Netflix release date label for card
+    let dateTag = '';
+    if (item.netflixDate) {
+      const d = new Date(item.netflixDate);
+      const now = new Date();
+      const diffDays = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+      if (diffDays <= 30) {
+        dateTag = `<span class="card-genre-tag new-release">🆕 新着</span>`;
+      } else {
+        const yy = d.getFullYear();
+        const mm = d.getMonth() + 1;
+        dateTag = `<span class="card-genre-tag">配信: ${yy}/${mm}</span>`;
+      }
+    }
 
     card.innerHTML = `
       <div class="rank-badge ${rankClass}">${rank}</div>
@@ -82,7 +93,7 @@ const Components = (() => {
         <div class="card-title">${item.title}</div>
         ${item.titleJa && item.titleJa !== item.title ? `<div class="card-title-ja">${item.titleJa}</div>` : ''}
         ${renderImdbBadge(item)}
-        <div class="card-genres">${genreTags}</div>
+        <div class="card-genres">${dateTag}</div>
       </div>
     `;
 
