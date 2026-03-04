@@ -235,11 +235,12 @@ const App = (() => {
             state.genres = data.genres || [];
             const container = document.getElementById('genre-pills');
             if (container) {
-                Components.renderGenrePills(state.genres, container, state.selectedGenre, (genre) => {
+                function onGenreSelect(genre) {
                     state.selectedGenre = genre;
-                    Components.renderGenrePills(state.genres, container, genre, arguments.callee);
+                    Components.renderGenrePills(state.genres, container, genre, onGenreSelect);
                     resetAndLoad();
-                });
+                }
+                Components.renderGenrePills(state.genres, container, state.selectedGenre, onGenreSelect);
             }
         } catch (err) {
             console.error('[App] Genre load error:', err);
