@@ -109,8 +109,8 @@ const Components = (() => {
       }
       </div>
       <div class="card-info">
-        <div class="card-title">${item.title}</div>
-        ${item.titleJa && item.titleJa !== item.title ? `<div class="card-title-ja">${item.titleJa}</div>` : ''}
+        <div class="card-title">${item.titleJa || item.title}</div>
+        ${item.titleJa && item.titleJa !== item.title ? `<div class="card-title-ja">${item.title}</div>` : ''}
         ${renderImdbBadge(item)}
         <div class="card-genres">${item.year ? `<span class="card-genre-tag">${item.year}年</span>` : ''}${dateTag}</div>
       </div>
@@ -233,9 +233,9 @@ const Components = (() => {
           <button class="modal-close" id="modal-close-btn">✕</button>
         </div>
         <div class="modal-body">
-          <div class="modal-title">${item.title}</div>
+          <div class="modal-title">${item.titleJa || item.title}</div>
           ${item.titleJa && item.titleJa !== item.title
-        ? `<div class="modal-title-ja">${item.titleJa}</div>`
+        ? `<div class="modal-title-ja">${item.title}</div>`
         : ''
       }
           <div class="modal-meta">
