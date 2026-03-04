@@ -43,9 +43,9 @@ const Components = (() => {
       let votesText = '';
       if (item.imdbVotes && item.imdbVotes > 0) {
         if (item.imdbVotes >= 10000) {
-          votesText = `<span class="imdb-votes">${(item.imdbVotes / 10000).toFixed(1)}万票</span>`;
+          votesText = `<span class="imdb-votes">${(item.imdbVotes / 10000).toFixed(1)}万件</span>`;
         } else {
-          votesText = `<span class="imdb-votes">${item.imdbVotes.toLocaleString()}票</span>`;
+          votesText = `<span class="imdb-votes">${item.imdbVotes.toLocaleString()}件</span>`;
         }
       }
       return `
