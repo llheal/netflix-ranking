@@ -93,7 +93,7 @@ const Components = (() => {
         <div class="card-title">${item.title}</div>
         ${item.titleJa && item.titleJa !== item.title ? `<div class="card-title-ja">${item.titleJa}</div>` : ''}
         ${renderImdbBadge(item)}
-        <div class="card-genres">${dateTag}</div>
+        <div class="card-genres">${item.year ? `<span class="card-genre-tag">${item.year}年</span>` : ''}${dateTag}</div>
       </div>
     `;
 
@@ -209,7 +209,7 @@ const Components = (() => {
           <div class="modal-meta">
             ${imdbSection}
             <span class="modal-type">${typeLabel}</span>
-            <span class="modal-date">#${rank}位 ${dateStr ? `• 配信: ${dateStr}` : ''}</span>
+            <span class="modal-date">#${rank}位 ${item.year ? `• ${item.year}年` : ''} ${dateStr ? `• 配信: ${dateStr}` : ''}</span>
           </div>
           <div class="modal-genres">${genreTags}</div>
           ${synopsisSection}

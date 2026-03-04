@@ -38,6 +38,9 @@ const API = (() => {
         if (filters.scoreRange && filters.scoreRange !== 'all') {
             params += `&scoreRange=${filters.scoreRange}`;
         }
+        if (filters.yearRange && filters.yearRange !== 'all') {
+            params += `&yearRange=${filters.yearRange}`;
+        }
         return params;
     }
 

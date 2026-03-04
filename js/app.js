@@ -9,6 +9,7 @@ const App = (() => {
         currentTab: 'global',
         currentType: 'all',     // 'all', 'movie', 'series'
         scoreRange: 'all',      // 'all', 'none', '0-5', '5-6', '6-7', '7-8', '8-9', '9-10'
+        yearRange: 'all',       // 'all', '2021-2030', '2011-2020', '2001-2010', '1991-2000', '1900-1990'
         page: 1,
         limit: 20,
         loading: false,
@@ -29,7 +30,7 @@ const App = (() => {
      * Get current filters object for API calls
      */
     function getFilters() {
-        return { scoreRange: state.scoreRange };
+        return { scoreRange: state.scoreRange, yearRange: state.yearRange };
     }
 
     /**
@@ -54,10 +55,20 @@ const App = (() => {
         });
 
         // Score range filter chips
-        document.querySelectorAll('.score-chip').forEach(chip => {
+        document.querySelectorAll('#score-filter .score-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 state.scoreRange = chip.dataset.scoreRange || 'all';
-                document.querySelectorAll('.score-chip').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('#score-filter .score-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                resetAndLoad();
+            });
+        });
+
+        // Year range filter chips
+        document.querySelectorAll('#year-filter .score-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                state.yearRange = chip.dataset.yearRange || 'all';
+                document.querySelectorAll('#year-filter .score-chip').forEach(c => c.classList.remove('active'));
                 chip.classList.add('active');
                 resetAndLoad();
             });
