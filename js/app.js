@@ -22,7 +22,8 @@ const App = (() => {
         newArrivalsDays: 7,
         selectedGenre: null,
         searchQuery: '',
-        genres: []
+        genres: [],
+        lastUpdated: ''
     };
 
     // DOM refs
@@ -305,9 +306,15 @@ const App = (() => {
     async function updateStatus() {
         try {
             const status = await API.getStatus();
+            if (status.lastUpdated) state.lastUpdated = status.lastUpdated;
             const countEl = document.getElementById('total-count');
             if (countEl) {
-                countEl.textContent = `${status.totalTitles} 作品`;
+                let txt = `${status.totalTitles} 作品`;
+                if (status.lastUpdated) {
+                    const d = new Date(status.lastUpdated);
+                    txt += ` (${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}更新)`;
+                }
+                countEl.textContent = txt;
             }
         } catch (err) {
             // Silent fail
@@ -345,7 +352,13 @@ const App = (() => {
             '9-10': ' IMDb 9+'
         };
         const scoreDesc = rangeLabels[state.scoreRange] || '';
-        resultsText.textContent = `${prefix}${tabLabels[state.currentTab]}${scoreDesc} — ${total}件`;
+
+        let updateStr = '';
+        if (state.lastUpdated) {
+            const d = new Date(state.lastUpdated);
+            updateStr = ` (${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}更新)`;
+        }
+        resultsText.textContent = `${prefix}${tabLabels[state.currentTab]}${scoreDesc} — ${total}件${updateStr}`;
     }
 
     /**
