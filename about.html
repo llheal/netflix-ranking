@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービス概要 | Netflix 評価ランキング</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #e50914;
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 12px;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin: 24px 0 8px;
+        }
+
+        p,
+        li {
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .provider {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .provider p {
+            margin-bottom: 4px;
+        }
+
+        .section {
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        a {
+            color: #e50914;
+        }
+
+        .updated {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Netflix 評価ランキング — サービス概要</h1>
+
+    <div class="provider">
+        <p><strong>【サービス提供・運営】</strong></p>
+        <p>UNIIS公式通販</p>
+        <p>〒614-8062 京都府八幡市八幡園内63番地の18</p>
+        <p>📧 <a href="mailto:contact@km-studio.top">contact@km-studio.top</a></p>
+    </div>
+
+    <h2>サービス概要</h2>
+    <p>「Netflix 評価ランキング」は、UNIIS公式通販が企画・開発・運営するLINEミニアプリです。Netflix Japanで配信中の約8,000作品をIMDb（Internet Movie
+        Database）の評価スコア順にランキング表示し、ユーザーが次に観る作品を簡単に見つけられるサービスを提供しています。</p>
+
+    <h2>主な機能</h2>
+    <div class="section">
+        <ul>
+            <li><strong>IMDb評価ランキング</strong> — 全作品をIMDbスコア順に表示</li>
+            <li><strong>ジャンル別ブラウズ</strong> — ドラマ、コメディ、アクション等27カテゴリ</li>
+            <li><strong>多条件フィルタリング</strong> — 国（米国・日本・韓国・欧州等）、年代、評価範囲、評価数で絞り込み</li>
+            <li><strong>ソート機能</strong> — 高評価順、低評価順、新しい順、古い順</li>
+            <li><strong>新着作品</strong> — 7日・14日・30日以内の新規配信作品</li>
+            <li><strong>キーワード検索</strong> — 日本語・英語タイトルで検索可能</li>
+            <li><strong>毎日自動更新</strong> — JustWatch API と IMDb 公式データセットから毎日最新データを取得</li>
+        </ul>
+    </div>
+
+    <h2>サービスの目的</h2>
+    <p>Netflixには膨大な作品が配信されていますが、評価の高い作品を効率的に見つけることが難しいという課題があります。本サービスは、世界最大の映画データベースであるIMDbの評価データを活用し、ユーザーが高品質な作品を素早く発見できるよう支援することを目的としています。
+    </p>
+
+    <h2>技術構成</h2>
+    <div class="section">
+        <ul>
+            <li><strong>フロントエンド</strong>：HTML/CSS/JavaScript（Vercel でホスティング）</li>
+            <li><strong>バックエンド</strong>：Node.js + Express（VPS でホスティング）</li>
+            <li><strong>データソース</strong>：JustWatch GraphQL API（作品情報）、IMDb公式データセット（評価スコア・ジャンル）</li>
+            <li><strong>LINE連携</strong>：LIFF SDK を使用したLINEミニアプリ</li>
+        </ul>
+    </div>
+
+    <h2>料金</h2>
+    <p>本サービスは完全無料でご利用いただけます。会員登録やログインは不要です。</p>
+
+    <h2>運営体制</h2>
+    <p>本サービスはUNIIS公式通販が自社で企画・開発・運営を行っています。データの取得・更新・サーバー管理・ユーザーサポートはすべてUNIIS公式通販が担当しています。</p>
+
+    <h2>関連リンク</h2>
+    <ul>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">サービス利用規約</a></li>
+    </ul>
+
+    <p class="updated">最終更新日：2026年3月6日</p>
+</body>
+
+</html>
