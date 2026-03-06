@@ -44,6 +44,26 @@ const Components = (() => {
     return GENRE_MAP[genre] || genre;
   }
 
+  /** Country code → name mapping */
+  const COUNTRY_MAP = {
+    'US': 'アメリカ', 'GB': 'イギリス', 'JP': '日本', 'KR': '韓国',
+    'FR': 'フランス', 'DE': 'ドイツ', 'IT': 'イタリア', 'ES': 'スペイン',
+    'CA': 'カナダ', 'AU': 'オーストラリア', 'IN': 'インド', 'CN': '中国',
+    'TW': '台湾', 'HK': '香港', 'TH': 'タイ', 'BR': 'ブラジル',
+    'MX': 'メキシコ', 'SE': 'スウェーデン', 'DK': 'デンマーク', 'NO': 'ノルウェー',
+    'FI': 'フィンランド', 'NL': 'オランダ', 'BE': 'ベルギー', 'AT': 'オーストリア',
+    'CH': 'スイス', 'PT': 'ポルトガル', 'IE': 'アイルランド', 'PL': 'ポーランド',
+    'CZ': 'チェコ', 'RO': 'ルーマニア', 'GR': 'ギリシャ', 'HU': 'ハンガリー',
+    'TR': 'トルコ', 'RU': 'ロシア', 'ZA': '南アフリカ', 'NG': 'ナイジェリア',
+    'EG': 'エジプト', 'AR': 'アルゼンチン', 'CO': 'コロンビア', 'CL': 'チリ',
+    'PH': 'フィリピン', 'ID': 'インドネシア', 'MY': 'マレーシア', 'SG': 'シンガポール',
+    'NZ': 'ニュージーランド', 'IL': 'イスラエル', 'PK': 'パキスタン',
+  };
+
+  function countryName(code) {
+    return COUNTRY_MAP[code] || code;
+  }
+
   /**
    * Render IMDb badge — shows score or "未評価" for unrated
    */
@@ -83,20 +103,6 @@ const Components = (() => {
     const rankClass = rank <= 3 ? 'top-3' : (rank <= 10 ? 'top-10' : '');
     const typeClass = item.type === 'series' ? 'series' : 'movie';
     const typeLabel = item.type === 'series' ? 'シリーズ' : '映画';
-    // Netflix release date label for card
-    let dateTag = '';
-    if (item.netflixDate) {
-      const d = new Date(item.netflixDate);
-      const now = new Date();
-      const diffDays = Math.floor((now - d) / (1000 * 60 * 60 * 24));
-      if (diffDays <= 30) {
-        dateTag = `<span class="card-genre-tag new-release">🆕 新着</span>`;
-      } else {
-        const yy = d.getFullYear();
-        const mm = d.getMonth() + 1;
-        dateTag = `<span class="card-genre-tag">配信: ${yy}/${mm}</span>`;
-      }
-    }
 
     card.innerHTML = `
       <div class="rank-badge ${rankClass}">${rank}</div>
@@ -111,7 +117,7 @@ const Components = (() => {
         <div class="card-title">${item.titleJa || item.title}</div>
         ${item.titleJa && item.titleJa !== item.title ? `<div class="card-title-ja">${item.title}</div>` : ''}
         ${renderImdbBadge(item)}
-        <div class="card-genres">${item.year ? `<span class="card-genre-tag">${item.year}年</span>` : ''}${dateTag}</div>
+        <div class="card-genres">${item.year ? `<span class="card-genre-tag">${item.year}年</span>` : ''}</div>
       </div>
     `;
 
@@ -214,11 +220,8 @@ const Components = (() => {
       ? `<div class="modal-synopsis">${item.synopsis}</div>`
       : '';
 
-    // Country flags
-    const countryFlags = (item.country || []).map(c => {
-      const flag = c.toUpperCase().replace(/./g, ch => String.fromCodePoint(127397 + ch.charCodeAt(0)));
-      return flag;
-    }).join(' ');
+    // Country names
+    const countryNames = (item.country || []).map(c => countryName(c)).join('・');
 
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
@@ -240,7 +243,7 @@ const Components = (() => {
           <div class="modal-meta">
             ${imdbSection}
             <span class="modal-type">${typeLabel}</span>
-            <span class="modal-date">#${rank}位 ${item.year ? `• ${item.year}年` : ''} ${countryFlags ? `• ${countryFlags}` : ''} ${dateStr ? `• 配信: ${dateStr}` : ''}</span>
+            <span class="modal-date">#${rank}位 ${item.year ? `• ${item.year}年` : ''} ${countryNames ? `• ${countryNames}` : ''}</span>
           </div>
           <div class="modal-genres">${genreTags}</div>
           ${synopsisSection}
